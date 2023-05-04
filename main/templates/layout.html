@@ -1,0 +1,27 @@
+<nav>
+    <ul class="topmenu">
+        <li><a href="{% url 'menu_item' root.url %}" class="active">{{ root.name }}<span class="fa fa-angle-down"></span></a>
+            <ul class="submenu">
+                {% for item in menu %}
+                <li><a href="{% url 'menu_item' item.url %}" class="submenu-link">{{ item.name }}</a>
+                    {% if item.submenu %}
+                    <ul class="submenu">
+                        {% for subitem in item.submenu %}
+                            <li><a href="{% url 'menu_item' subitem.url %}" class="submenu-link">{{ subitem.name }}</a>
+                                {% if subitem.submenu %}
+                                <ul class="submenu">
+                                    {% for sub in subitem.submenu %}
+                                        <li><a href="{% url 'menu_item' sub.url %}">{{ sub.name }}</a>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+</nav>
